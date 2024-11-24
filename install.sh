@@ -13,7 +13,7 @@ fi
 ln -sf ~/.dotfiles/zsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
 ln -sf ~/.dotfiles/zsh/prompt.zsh ~/.oh-my-zsh/custom/prompt.zsh
 
-if [[ "$SHELL" != "$(which zsh)" ]]; then
+if [ "$SHELL" != "$(which zsh)" ]; then
   echo "Setting Zsh as the default shell..."
   chsh -s "$(which zsh)"
   echo "Default shell set to Zsh."
