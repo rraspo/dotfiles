@@ -1,3 +1,5 @@
+# Prefered prompt with git plugin
+
 ZSHRC_USER_HOST="%F{cyan}%n@%m:%f"
 ZSHRC_CURRENT_DIR="%F{cyan}%~%f"
 ZSHRC_CONDITIONAL="%(?.%F{green}.%F{red})➜ %f"
