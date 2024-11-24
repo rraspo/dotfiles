@@ -10,8 +10,9 @@ else
   cd ~/.dotfiles && git pull
 fi
 
-ln -sf ~/.dotfiles/zsh/aliases.zsh ~/.oh-my-zsh/custom/aliases.zsh
-ln -sf ~/.dotfiles/zsh/prompt.zsh ~/.oh-my-zsh/custom/prompt.zsh
+if ! grep -q "# Source custom Zsh configurations" ~/.zshrc; then
+  echo -e "\n# Source custom Zsh configurations\nfor file in ~/.dotfiles/zsh/*.zsh; do\n  [ -r \"\$file\" ] && source \"\$file\"\ndone" >> ~/.zshrc
+fi
 
 if [ "$SHELL" != "$(which zsh)" ]; then
   echo "Setting Zsh as the default shell..."
