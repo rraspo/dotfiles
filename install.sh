@@ -21,5 +21,5 @@ else
   echo "Zsh is already the default shell."
 fi
 
-source ~/.zshrc
+. ~/.zshrc
 echo "Setup complete!"
