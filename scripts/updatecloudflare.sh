@@ -9,15 +9,11 @@ else
 fi
 
 # Check if required environment variables are set
-if [[ -z "$API_TOKEN" || -z "$ZONE_ID" || -z "$DNS_RECORD_NAME" ]]; then
-  echo "Error: Missing required variables in .env file (API_TOKEN, ZONE_ID, DNS_RECORD_NAME)."
+if [[ -z "$API_BASE" || -z "$API_KEY" || -z "$EMAIL" || -z "$DOMAIN" ]]; then
+  echo "Error: Missing required variables in .env file (API_BASE, API_KEY, EMAIL, DOMAIN)."
   exit 1
 fi
 
-# API endpoint base
-API_BASE="https://api.cloudflare.com/client/v4"
-
-# Function to fetch public IP
 get_public_ip() {
   curl -s -4 https://ifconfig.me
 }
@@ -29,7 +25,21 @@ get_dns_record() {
     -H "Content-Type:application/json"
 }
 
-# Function to update DNS record
+if [[ -n "$SUBDOMAINS" ]]; then
+  echo "Subdomains are set: $SUBDOMAINS"
+  IFS=' ' read -r -a SUBDOMAINS <<< "$SUBDOMAINS"
+  for SUBDOMAIN in "${SUBDOMAINS[@]}"; do
+    echo "Processing subdomain: $SUBDOMAIN"
+    DNS_RECORD_ID=$(get_dns_record_id "$SUBDOMAIN")
+    if [[ -z "$DNS_RECORD_ID" ]]; then
+      echo "Error: Could not find DNS record for $SUBDOMAIN."
+      continue
+    fi
+    update_dns_record "$SUBDOMAIN" "$DNS_RECORD_ID" "$PUBLIC_IP"
+  done
+
+fi
+
 update_dns_record() {
   RECORD_ID=$2
   CURRENT_IP=$1
