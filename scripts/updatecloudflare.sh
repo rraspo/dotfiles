@@ -53,7 +53,7 @@ generate_post_data() {
     cat <<EOF
 {
     "comment": "Domain verification record",
-    "name": "$DNS_RECORD_NAME",
+    "name": "$DOMAIN",
     "proxied": true,
     "settings": {},
     "tags": [],
@@ -66,7 +66,7 @@ EOF
     cat <<EOF
 {
     "comment": "Domain verification record",
-    "name": "$SUBDOMAIN.$DNS_RECORD_NAME",
+    "name": "$SUBDOMAIN.$DOMAIN",
     "proxied": true,
     "settings": {},
     "tags": [],
