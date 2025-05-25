@@ -4,7 +4,7 @@ sudo apt update && sudo apt install -y zsh curl git
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 if [ ! -d ~/.dotfiles ]; then
-  git clone https://github.com/your-username/dotfiles.git ~/.dotfiles
+  git clone https://github.com/rraspo/dotfiles.git ~/.dotfiles
 else
   echo "~/.dotfiles already exists. Pulling latest changes."
   cd ~/.dotfiles && git pull
